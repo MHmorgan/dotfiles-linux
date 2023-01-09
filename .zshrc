@@ -13,7 +13,7 @@ function __bold  { echo "$fg_bold[default]$*$reset_color" }
 function __exists   { which $* &>/dev/null }
 function __ifexists { which $1 &>/dev/null && $* }
 
-__emph "Zshrc v72"
+__emph "Zshrc Linux v1"
 
 export EDITOR='nvim'
 export PAGER='less'
@@ -33,23 +33,8 @@ __info "PATHs"
 
 export PATH="$HOME/bin:$PATH"
 
-# Homebrew
-if [[ -d /opt/homebrew ]]; then
-	export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
-elif [[ -d $HOME/homebrew ]]; then
-	export PATH="$PATH:$HOME/homebrew/bin:$HOME/homebrew/sbin"
-else
-	__bad "Homebrew root folder not found."
-fi
-
 # Go
 export PATH="$PATH:$HOME/go/bin"
-
-# Rust
-export PATH="$PATH:$HOME/.cargo/bin"
-
-# Dart & Flutter
-export PATH="$PATH:/usr/lib/dart/bin:$HOME/flutter/bin:$HOME/.pub-cache/bin"
 
 # PostgreSQL
 export PATH="$PATH:/usr/lib/postgresql/13/bin"
@@ -340,52 +325,20 @@ function update {
 	echo "-----------"
 	rogu sync
 
-	__bold "\nHomebrew update"
+	__bold "\nApt update"
 	echo "---------------"
-	brew update && brew upgrade
+	apt update && apt upgrade
 }
 #}}}
 
 
 ################################################################################
-# Completion
-#
-# See:
-#   manpage zshcompsys
-#	https://thevaluable.dev/zsh-completion-guide-examples/
-#   https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+# Apt
 #
 #{{{
 
-__info "Completion"
-
-# Set completers
-#   _extensions  : Complete the glob *. with possible file extensions
-#   _complete    : The main completer needed for completion.
-#   _approximate : Try to correct what you've already typed if no match is found.
-zstyle ':completion:*' completer _extensions _complete _approximate
-
-# Completion caching
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$HOME/.zcompcache"
-
-# Print description headers for completions
-zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
-# Print completion messages and warnings
-zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches --%f'
-
-# Group matches under their description header
-zstyle ':completion:*' group-name ''
-#}}}
-
-
-################################################################################
-# Homebrew
-#
-#{{{
-
-export HOMEBREW_APPS=(
+# TODO Update the apt apps
+export APT_APPS=(
 	cheat
 	cowsay
 	docker
@@ -418,23 +371,6 @@ export HOMEBREW_APPS=(
 	tldr
 	tmux
 )
-
-function brewinstall {
-	if ! __exists brew
-	then
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	fi
-	brew install -q $HOMEBREW_APPS
-}
-
-
-if __exists brew
-then
-	# brew command completion
-	FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-	autoload -Uz compinit
-	compinit
-fi
 #}}}
 
 
@@ -458,7 +394,7 @@ fi
 #
 # Check essential and non-essential applications, respectively
 #
-for APP in rogu brew git gh starship thefuck; do
+for APP in rogu git gh starship thefuck; do
 	__exists $APP || __bad "Not installed: $APP"
 done
 for APP in neofetch fortune cowsay rg pandoc tag; do
@@ -474,13 +410,6 @@ if [[ -d ~/lib ]]; then
 	export PYTHONPATH="$HOME/lib:$PYTHONPATH"
 else
 	__warn "Custom libraries directory not found (~/lib)"
-fi
-
-
-if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
-	source ~/.iterm2_shell_integration.zsh
-else
-	__info "iTerm2 integration script not found (~/.iterm2_shell_integration.zsh)"
 fi
 
 
