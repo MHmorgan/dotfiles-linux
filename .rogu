@@ -10,7 +10,7 @@ rogu:
 
 
 dotfiles:
-  repo: https://github.com/MHmorgan/dotfiles-mac.git
+  repo: https://github.com/MHmorgan/dotfiles-linux.git
   branch: main
 
 
@@ -42,16 +42,6 @@ scripts:
     uninstall: |
       rm -rf ~/.oh-my-zsh
 
-  FiraMono Fonts:
-    check: |
-      cd ~/Library/Fonts
-      find . -name 'Fura Mono*Nerd Font*' | grep -q .
-    install: |
-      cd ~/Library/Fonts
-      curl -sSLO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraMono.zip
-      unzip FiraMono.zip -x '*Windows*' readme.md LICENSE.txt
-      rm FiraMono.zip
-
 
 # Files are files which rogu downloads and keeps in sync.
 #
@@ -60,11 +50,6 @@ scripts:
 # The `priority` is used to determine the installation order
 # and is mixed with the `priority` of the `items` above.
 files:
-
-  kladd.pl:
-    url: https://raw.githubusercontent.com/MHmorgan/boilerplates/main/kladd.pl
-    dst: ~/bin/kladd
-    mode: 0o755
 
   common.py:
     url: https://raw.githubusercontent.com/MHmorgan/boilerplates/main/common.py
@@ -75,13 +60,9 @@ files:
     dst: ~/lib/common.zsh
 
   selector:
-    url: https://github.com/MHmorgan/selector/releases/latest/download/selector_darwin_arm64
+    url: https://github.com/MHmorgan/selector/releases/latest/download/selector_linux_amd64
     dst: ~/bin/selector
     mode: 0o755
-
-  Shell Integration:
-    url: https://iterm2.com/shell_integration/zsh 
-    dst: ~/.iterm2_shell_integration.zsh
 
 
 templates:
