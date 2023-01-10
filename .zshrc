@@ -13,7 +13,7 @@ function __bold  { echo "$fg_bold[default]$*$reset_color" }
 function __exists   { which $* &>/dev/null }
 function __ifexists { which $1 &>/dev/null && $* }
 
-__emph "Zshrc Linux v1"
+__emph "Zshrc Linux v2"
 
 export EDITOR='nvim'
 export PAGER='less'
@@ -445,4 +445,5 @@ then
 	fortune | cowsay -n
 fi
 #}}}
+
 
