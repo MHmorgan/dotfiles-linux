@@ -396,10 +396,10 @@ fi
 #
 # Check essential and non-essential applications, respectively
 #
-for APP in rogu git gh starship thefuck; do
+for APP in rogu git gh thefuck; do
 	__exists $APP || __bad "Not installed: $APP"
 done
-for APP in neofetch fortune cowsay rg pandoc tag; do
+for APP in neofetch fortune cowsay rg pandoc; do
 	__exists $APP || __warn "Not installed: $APP"
 done
 
@@ -423,8 +423,6 @@ fi
 
 
 eval "$(thefuck --alias)"
-eval "$(starship init zsh)"
-eval "$(kladd --completion)"
 
 
 __ifexists rogu doctor
