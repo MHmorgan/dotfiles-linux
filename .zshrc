@@ -182,7 +182,7 @@ function editdotfile {
 
 	# Increase version number for .zshrc
 	if [[ $fpath =~ ".zshrc$" ]]; then
-		local old=$(cat $fpath | perl -nE 'say $1 if /"Zshrc ?\w* (v\d+)"$/')
+		local old=$(cat $fpath | perl -nE 'say $1 if /"Zshrc \w+ (v\d+)"$/')
 		cat $fpath | perl -pE '
 			next unless /"Zshrc ?\w* v(\d+)"$/;
 			my $num = $1 + 1;
