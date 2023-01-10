@@ -23,6 +23,8 @@ export GOTO_PATH=(
 	$HOME/Downloads
 )
 
+export LC_ALL='C.UTF-8'
+
 
 ################################################################################
 # PATH
@@ -327,7 +329,7 @@ function update {
 
 	__bold "\nApt update"
 	echo "---------------"
-	apt update && apt upgrade
+	sudo apt update && sudo apt upgrade
 }
 #}}}
 
