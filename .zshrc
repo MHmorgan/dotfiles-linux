@@ -13,7 +13,7 @@ function __bold  { echo "$fg_bold[default]$*$reset_color" }
 function __exists   { which $* &>/dev/null }
 function __ifexists { which $1 &>/dev/null && $* }
 
-__emph "Zshrc Linux v2"
+__emph "Zshrc Linux v3"
 
 export EDITOR='nvim'
 export PAGER='less'
@@ -422,8 +422,8 @@ else
 fi
 
 
-eval "$(thefuck --alias)"
-
+_ifexists thefuck eval "$(thefuck --alias)"
+_ifexists starship eval "$(starship init zsh)"
 
 __ifexists rogu doctor
 
@@ -445,5 +445,4 @@ then
 	fortune | cowsay -n
 fi
 #}}}
-
 
